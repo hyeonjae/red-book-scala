@@ -24,18 +24,35 @@ class ComposeTest extends FunSuite {
   def f(n: Int): Int = n * 2
   def g(n: Int): Int = n * n
 
-  test("1") {
+  test("doubleFunc(5) == 10") {
     assert(doubleFunc(5) === 10)
+  }
+
+  test("squareFunc(3) == 9") {
     assert(squareFunc(3) === 9)
   }
 
-  test("2") {
+  test("f(5) == 5 * 2 == 10") {
     assert(f(5) === 10)
+  }
+
+  test("g(3) == 3 * 3 == 9") {
     assert(g(3) === 9)
   }
 
-  test("3") {
+  test("doubleFunc(squareFunc(5)) == 50") {
+    assert(compose(doubleFunc, squareFunc)(5) === 50)
+  }
+
+  test("squareFunc(doubleFunc(5)) == 100") {
+    assert(compose(squareFunc, doubleFunc)(5) === 100)
+  }
+
+  test("f(g(5)) == 50") {
     assert(compose(f, g)(5) === 50)
+  }
+
+  test("g(f(5)) == 100") {
     assert(compose(g, f)(5) === 100)
   }
 }
